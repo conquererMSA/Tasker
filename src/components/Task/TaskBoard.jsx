@@ -18,7 +18,7 @@ const TaskBoard = () => {
     const [taskToUpdate, setTaskToUpdate]=useState(null)
 
     //add korbe and update korbe
-    const handleAddTask=(newTask,e,isAdd)=>{
+    const handleAddAndEditTask=(newTask,e,isAdd)=>{
         e.preventDefault()
         if(isAdd){
             setTasks([
@@ -43,12 +43,18 @@ const TaskBoard = () => {
 
        
     }
+
+    const handleCloseModal=()=>{
+        setShowAddTaskModal(false)
+        setTaskToUpdate(null)
+    }
     
     return (
         <section className="mb-20" id="tasks">
 		{showAddTaskModal&&<AddTaskModal 
-        onSave={handleAddTask}
-        taskToUpdate={taskToUpdate} />}
+        onSave={handleAddAndEditTask}
+        taskToUpdate={taskToUpdate} 
+        closeModal={handleCloseModal}/>}
 		<div className="container">
 		<div className="p-2 flex justify-end">
 			<SearchTask/>
