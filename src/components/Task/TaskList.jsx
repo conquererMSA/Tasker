@@ -1,5 +1,5 @@
 import { FaStar } from 'react-icons/fa';
-const TaskList = ({tasks, onEdit}) => {
+const TaskList = ({tasks, onEdit, deleteTask, handleFav}) => {
     // console.log(tasks);
     
     return (
@@ -19,7 +19,10 @@ const TaskList = ({tasks, onEdit}) => {
             
             tasks.map(task=>(
                 <tr key={task.id} className="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2">
-                <td>{task?.isFav? <FaStar className='text-yellow-500'/> : <FaStar/>}</td>
+                <td> <button onClick={()=>handleFav(task.id)}>
+                {task?.isFav? <FaStar className='text-yellow-500'/> : <FaStar/>}
+                </button>
+                    </td>
                 <td>{task.title}</td>
                 <td>
                     <div>
@@ -39,7 +42,8 @@ const TaskList = ({tasks, onEdit}) => {
                 <td className="text-center">{task.priority}</td>
                 <td>
                     <div className="flex items-center justify-center space-x-3">
-                        <button className="text-red-500">Delete</button>
+                        <button onClick={()=>deleteTask(task.id)}
+                         className="text-red-500">Delete</button>
                         <button onClick={()=>onEdit(task)}
                          className="text-blue-500">Edit</button>
                     </div>
